@@ -10,4 +10,4 @@ select * from emp2 where dept_id = (select id from dept where name = '研发部'
 select entrydate from emp2 where name='易新月';
 
 -- b.查询指定入职日期之后入职的员工信息
-select * from emp2 where entrydate =(select entrydate from emp2 where name='易新月')
+select * from emp2 where entrydate >(select entrydate from emp2 where name='易新月')
