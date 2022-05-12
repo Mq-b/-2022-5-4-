@@ -1,9 +1,6 @@
-#pragma once;       //防止头文件重复包含，Windows平台专属
-#ifdef __cplusplus //使用预定义宏判断是否为cpp文件
+#pragma once;       //闃叉澶存枃浠堕噸澶嶅寘鍚紝Windows骞冲彴涓撳睘
+#ifdef __cplusplus //浣跨敤棰勫畾涔夊畯鍒ゆ柇鏄惁涓篶pp鏂囦欢
 extern "C" {
     void display();
 }
-#endif
-#ifndef __cplusplus
-void display();
 #endif
