@@ -5,7 +5,7 @@ DataBase::DataBase()
     this->_state = false;
     this->_mysql = new MYSQL;
     _fd = nullptr;
-    memset(_field, NULL, sizeof(_field));
+    memset(_field, NULL, sizeof(_field));////æŠŠç¬¬ä¸€ä¸ªå‚æ•°æ‰€æŒ‡çš„åœ°å€çš„å‰é¢n(ç¬¬ä¸‰ä¸ªå‚æ•°)ä¸ªå­—èŠ‚èµ‹å€¼ä¸ºç¬¬äºŒä¸ªå‚æ•°
     _res = nullptr;
     _column = nullptr;
     memset(this->_query, NULL, sizeof(this->_query));
@@ -20,10 +20,10 @@ bool DataBase::Connect(const char* ip, const char* name, const char* cypher, con
         printf("Database connected\n");
         return false;
     }
-    //³õÊ¼»¯mysql  
+    //åˆå§‹åŒ–mysql  
     mysql_init(this->_mysql);
-    //·µ»ØfalseÔòÁ¬½ÓÊ§°Ü£¬·µ»ØtrueÔòÁ¬½Ó³É¹¦  
-    if (!(mysql_real_connect(this->_mysql, ip, name, cypher, database_name, port, NULL, 0))) //ÖĞ¼ä·Ö±ğÊÇÖ÷»ú£¬ÓÃ»§Ãû£¬ÃÜÂë£¬Êı¾İ¿âÃû£¬¶Ë¿ÚºÅ£¨¿ÉÒÔĞ´Ä¬ÈÏ0»òÕß3306µÈ£©£¬¿ÉÒÔÏÈĞ´³É²ÎÊıÔÙ´«½øÈ¥  
+    //è¿”å›falseåˆ™è¿æ¥å¤±è´¥ï¼Œè¿”å›trueåˆ™è¿æ¥æˆåŠŸ  
+    if (!(mysql_real_connect(this->_mysql, ip, name, cypher, database_name, port, NULL, 0))) //ä¸­é—´åˆ†åˆ«æ˜¯ä¸»æœºï¼Œç”¨æˆ·åï¼Œå¯†ç ï¼Œæ•°æ®åº“åï¼Œç«¯å£å·ï¼ˆå¯ä»¥å†™é»˜è®¤0æˆ–è€…3306ç­‰ï¼‰ï¼Œå¯ä»¥å…ˆå†™æˆå‚æ•°å†ä¼ è¿›å»  
     {
         printf("Error connecting to database:%s\n", mysql_error(this->_mysql));
         return false;
@@ -44,23 +44,23 @@ int DataBase::GetTableField(const char* table_name)
         printf("Database not connected\n");
         return -1;
     }
-    //²éÑ¯ÄÚÈİ
-    sprintf_s(this->_query, "desc %s", table_name); //desc Óï¾ä»ñÈ¡×Ö¶ÎÊı
-    //ÉèÖÃ±àÂë¸ñÊ½£¨SET NAMES GBKÒ²ĞĞ£©£¬·ñÔòcmdÏÂÖĞÎÄÂÒÂë 
+    //æŸ¥è¯¢å†…å®¹
+    sprintf_s(this->_query, "desc %s", table_name); //desc è¯­å¥è·å–å­—æ®µæ•°
+    //è®¾ç½®ç¼–ç æ ¼å¼ï¼ˆSET NAMES GBKä¹Ÿè¡Œï¼‰ï¼Œå¦åˆ™cmdä¸‹ä¸­æ–‡ä¹±ç  
     mysql_query(this->_mysql, "set names gbk");
-    //·µ»Ø0 ²éÑ¯³É¹¦£¬·µ»Ø1²éÑ¯Ê§°Ü  
-    if (mysql_query(this->_mysql, this->_query))    //Ö´ĞĞSQLÓï¾ä
+    //è¿”å›0 æŸ¥è¯¢æˆåŠŸï¼Œè¿”å›1æŸ¥è¯¢å¤±è´¥  
+    if (mysql_query(this->_mysql, this->_query))    //æ‰§è¡ŒSQLè¯­å¥
     {
         printf("Query failed (%s)\n", mysql_error(this->_mysql));
         return false;
     }
-    //»ñÈ¡½á¹û¼¯  
-    if (!(_res = mysql_store_result(this->_mysql)))   //»ñµÃsqlÓï¾ä½áÊøºó·µ»ØµÄ½á¹û¼¯  
+    //è·å–ç»“æœé›†  
+    if (!(_res = mysql_store_result(this->_mysql)))   //è·å¾—sqlè¯­å¥ç»“æŸåè¿”å›çš„ç»“æœé›†  
     {
         printf("Couldn't get result from %s\n", mysql_error(this->_mysql));
         return false;
     }
-    //Êı¾İĞĞÊı¼´Îª×Ö¶Î¸öÊı
+    //æ•°æ®è¡Œæ•°å³ä¸ºå­—æ®µä¸ªæ•°
     return mysql_affected_rows(this->_mysql);
 }
 
@@ -71,14 +71,14 @@ bool DataBase::Query(const char* table_name)
         printf("Database not connected\n");
         return false;
     }
-    //»ñÈ¡×Ö¶ÎÊı
+    //è·å–å­—æ®µæ•°
     int field = GetTableField(table_name);
-    //²éÑ¯ÄÚÈİ
-    sprintf_s(this->_query, "select * from %s", table_name); //Ö´ĞĞ²éÑ¯Óï¾ä 
-    //ÉèÖÃ±àÂë¸ñÊ½£¨SET NAMES GBKÒ²ĞĞ£©£¬·ñÔòcmdÏÂÖĞÎÄÂÒÂë 
+    //æŸ¥è¯¢å†…å®¹
+    sprintf_s(this->_query, "select * from %s", table_name); //æ‰§è¡ŒæŸ¥è¯¢è¯­å¥ 
+    //è®¾ç½®ç¼–ç æ ¼å¼ï¼ˆSET NAMES GBKä¹Ÿè¡Œï¼‰ï¼Œå¦åˆ™cmdä¸‹ä¸­æ–‡ä¹±ç  
     mysql_query(this->_mysql, "set names gbk");
-    //·µ»Ø0 ²éÑ¯³É¹¦£¬·µ»Ø1²éÑ¯Ê§°Ü  
-    if (mysql_query(this->_mysql, this->_query))    //Ö´ĞĞSQLÓï¾ä
+    //è¿”å›0 æŸ¥è¯¢æˆåŠŸï¼Œè¿”å›1æŸ¥è¯¢å¤±è´¥  
+    if (mysql_query(this->_mysql, this->_query))    //æ‰§è¡ŒSQLè¯­å¥
     {
         printf("Query failed (%s)\n", mysql_error(this->_mysql));
         return false;
@@ -87,31 +87,31 @@ bool DataBase::Query(const char* table_name)
     {
         printf("query success\n");
     }
-    //»ñÈ¡½á¹û¼¯  
-    if (!(_res = mysql_store_result(this->_mysql)))   //»ñµÃsqlÓï¾ä½áÊøºó·µ»ØµÄ½á¹û¼¯  
+    //è·å–ç»“æœé›†  
+    if (!(_res = mysql_store_result(this->_mysql)))   //è·å¾—sqlè¯­å¥ç»“æŸåè¿”å›çš„ç»“æœé›†  
     {
         printf("Couldn't get result from %s\n", mysql_error(this->_mysql));
         return false;
     }
-    //´òÓ¡Êı¾İĞĞÊı  
+    //æ‰“å°æ•°æ®è¡Œæ•°  
     printf("number of dataline returned: %lld\n", mysql_affected_rows(this->_mysql));
-    //»ñÈ¡×Ö¶ÎµÄĞÅÏ¢  
-    char* str_field[32];  //¶¨ÒåÒ»¸ö×Ö·û´®Êı×é´æ´¢×Ö¶ÎĞÅÏ¢  
-    for (int i = 0; i < field; i++)  //ÔÚÒÑÖª×Ö¶ÎÊıÁ¿µÄÇé¿öÏÂ»ñÈ¡×Ö¶ÎÃû  
+    //è·å–å­—æ®µçš„ä¿¡æ¯  
+    char* str_field[32];  //å®šä¹‰ä¸€ä¸ªå­—ç¬¦ä¸²æ•°ç»„å­˜å‚¨å­—æ®µä¿¡æ¯  
+    for (int i = 0; i < field; i++)  //åœ¨å·²çŸ¥å­—æ®µæ•°é‡çš„æƒ…å†µä¸‹è·å–å­—æ®µå  
     {
         str_field[i] = mysql_fetch_field(_res)->name;
     }
-    for (int i = 0; i < field; i++)  //´òÓ¡×Ö¶Î  
+    for (int i = 0; i < field; i++)  //æ‰“å°å­—æ®µ  
     {
         printf("%10s\t", str_field[i]);
     }
     printf("\n");
-    //´òÓ¡»ñÈ¡µÄÊı¾İ  
-    while (_column = mysql_fetch_row(_res))   //ÔÚÒÑÖª×Ö¶ÎÊıÁ¿Çé¿öÏÂ£¬»ñÈ¡²¢´òÓ¡ÏÂÒ»ĞĞ  
+    //æ‰“å°è·å–çš„æ•°æ®  
+    while (_column = mysql_fetch_row(_res))   //åœ¨å·²çŸ¥å­—æ®µæ•°é‡æƒ…å†µä¸‹ï¼Œè·å–å¹¶æ‰“å°ä¸‹ä¸€è¡Œ  
     {
         for (int i = 0; i < field; i++)
         {
-            printf("%10s\t", _column[i]);  //columnÊÇÁĞÊı×é  
+            printf("%10s\t", _column[i]);  //columnæ˜¯åˆ—æ•°ç»„  
         }
         printf("\n");
     }
@@ -125,11 +125,11 @@ bool DataBase::Implement(const char* sentence)
         printf("Database not connected\n");
         return false;
     }
-    //²éÑ¯ÄÚÈİ
-    sprintf_s(this->_query, "%s", sentence); //desc Óï¾ä»ñÈ¡×Ö¶ÎÊı
-    //ÉèÖÃ±àÂë¸ñÊ½£¨SET NAMES GBKÒ²ĞĞ£©£¬·ñÔòcmdÏÂÖĞÎÄÂÒÂë 
+    //æŸ¥è¯¢å†…å®¹
+    sprintf_s(this->_query, "%s", sentence); //desc è¯­å¥è·å–å­—æ®µæ•°
+    //è®¾ç½®ç¼–ç æ ¼å¼ï¼ˆSET NAMES GBKä¹Ÿè¡Œï¼‰ï¼Œå¦åˆ™cmdä¸‹ä¸­æ–‡ä¹±ç  
     mysql_query(this->_mysql, "set names gbk");
-    //Ö´ĞĞSQLÓï¾ä
+    //æ‰§è¡ŒSQLè¯­å¥
     if (mysql_query(this->_mysql, this->_query))
     {
         printf("Query failed (%s)\n", mysql_error(this->_mysql));
