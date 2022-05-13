@@ -84,6 +84,10 @@ namespace sort_ {
     // 耗时代码
 	}
 */
+	//变参变量模板
+	template<auto... args>
+	constexpr auto Mul_ = (...*args);
+	//位运算交换
 	void swap(auto& a, auto& b) {
 		a ^= b;
 		b ^= a;
