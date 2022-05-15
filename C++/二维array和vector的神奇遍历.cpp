@@ -18,8 +18,16 @@ int main()
     for (int i = 0; i < 10* 10; ++i) //遍历
         std::cout << ptr[i] << ' '; 
 
-   /* int a[2][2]{ {1,2,},{3,4} };
-    std::cout << a[0][3] << '\n';*/
+    //对于普通数组，当然可以像下面这样（虽然地址一样，但是安全性暂不清楚）
+    int A[4][4]{};
+	A[3][3] = 100;
+	std::cout << &A[0][1] << std::endl;
+	int* ptr = reinterpret_cast<int*>(A);
+	for (auto i = 0; i < 16; i++) {
+		std::cout << ptr[i] << ' ';
+	}
+	std::cout << std::endl;
+	std::cout << &ptr[1] << std::endl;
     system("pause");
     return 0;
 }
