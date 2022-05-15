@@ -1,6 +1,6 @@
 -- 排序查询
 -- 1.根据年龄对公司员工进行升序排序
-select * from emp order by age asc;
+select * from emp order by age asc;  -- 升序
 select * from emp order by age desc; -- 降序
 
 select * from emp order by age ;   -- 省略写法，默认升序
