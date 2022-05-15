@@ -5,20 +5,20 @@
 #include"DynamicArray.h"
 void test01()
 {
-    //³õÊ¼»¯¶¯Ì¬Êý×é
+    //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½
     Dynamic_Array* myArray = Array_Init();
-    //²åÈëÔªËØ
-    printf("¶¯Ì¬Êý×éÈÝÁ¿%d\n", Cappcity_Array(myArray));
-    printf("¶¯Ì¬Êý×éÔªËØ¸öÊý%d\n", Size_Array(myArray));
+    //ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
+    printf("ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%d\n", Cappcity_Array(myArray));
+    printf("ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½Ôªï¿½Ø¸ï¿½ï¿½ï¿½%d\n", Size_Array(myArray));
     for (int i = 0; i < 10; i++) {
         Push_Back_Array(myArray, i);
     }
-    printf("¶¯Ì¬Êý×éÈÝÁ¿%d\n", Cappcity_Array(myArray));
-    printf("¶¯Ì¬Êý×éÔªËØ¸öÊý%d\n", Size_Array(myArray));
-    //´òÓ¡
+    printf("ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%d\n", Cappcity_Array(myArray));
+    printf("ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½Ôªï¿½Ø¸ï¿½ï¿½ï¿½%d\n", Size_Array(myArray));
+    //ï¿½ï¿½Ó¡
     Print_Array(myArray);
-    printf("²éÕÒ%d\n", Find_Array(myArray, 2));
-    printf("É¾³ý\n");
+    printf("ï¿½ï¿½ï¿½ï¿½%d\n", Find_Array(myArray, 2));
+    printf("É¾ï¿½ï¿½\n");
     RemoveByValue_Array(myArray, 9);
     for (int i = 0; i < myArray->size; i++) {
         printf("%d\n", myArray->pAddr[i]);
@@ -31,7 +31,7 @@ void test01()
     for (int i = 0; i < myArray->size; i++) {
         printf("%d\n", myArray->pAddr[i]);
     }
-    //Ïú»Ù
+    //ï¿½ï¿½ï¿½ï¿½
     FreeSpace_Array(myArray);
 }
 int main()
