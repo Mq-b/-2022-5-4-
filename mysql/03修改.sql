@@ -12,4 +12,3 @@ delete from user where gender='女';
 
 -- 删除所有员工
 delete from user;
-
