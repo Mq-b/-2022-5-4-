@@ -37,3 +37,13 @@ select workaddress  '工作地址' from emp;
 
 -- 4、查询公司员工的上班地址(不要重复)
 select distinct workaddress '工作地址' from emp;    -- distinct关键字用来去除重复
+
+/*
+select name,workno,gender,age,idcard,workaddress,entrydate from emp;
+
+select * from emp;
+
+select workaddress '工作地址' from emp;
+
+select distinct workaddress '工作地址' from emp;
+*/

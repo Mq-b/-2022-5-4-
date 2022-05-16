@@ -14,3 +14,16 @@ select min(age) from emp;
 
 -- 5.统计北京地区员工的年龄之和
 select sum(age) from emp where workaddress ='北京';
+
+/*
+select count(*) from emp;
+select coutn(idcard) from emp;
+
+select avg(age) from emp;
+
+select max(age) from emp;
+
+select min(age) from emp;
+
+select sum(age) from emp where workaddress='北京';
+*/

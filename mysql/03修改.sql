@@ -12,3 +12,15 @@ delete from user where gender='女';
 
 -- 删除所有员工
 delete from user;
+
+/*
+    update user set name='itheima' where id=1;
+
+    update user set name='小昭'，gender='女' where id=1;
+
+    update user set entrydate='2008-01-01';
+
+    delete from user where gender='女';
+
+    delete from user
+*/

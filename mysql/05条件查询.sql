@@ -36,3 +36,31 @@ select *from emp where name like '__';      -- 两个下划线表示两个字
 -- 11.查询身份证号最后一位是X的员工信息
 select * from emp where idcard like '%X';
 select * from emp where idcard like '_________________X';
+
+/*
+select *from emp where age=88;
+
+select *from emp where age<20;
+
+select *from emp where age<=20;
+
+select *from emp where idcard is null;
+
+select *from emp where idcard is not null;
+
+select *from emp where age!=88;
+select *from emp where age<>88;
+
+select *from emp where age>=15&&age<=20;
+select *from emp where age>=15 and age<=20;
+select *from emp where age between 15 and 20;
+
+select* from emp where age=18 or age=20 or age=40;
+select* from emp where age in(18,20,40)
+
+select *from emp where name like '__'
+
+select *from emp where idcard name like '%X'
+select *from emp where idcard name like'_________________X'
+
+*/
