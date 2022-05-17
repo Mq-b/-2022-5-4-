@@ -9,7 +9,7 @@ public:
 		[=,this] { this->m = a; }();//有所不同的是没有[&this]这种东西，只需要像目前这样就能修改成员变量的值了
 	}
 	void test() {
-		[this] {this->m = 111; };
+		[this] {this->m = 111; }();	//其实加不jia=都可以直接改变成员变量，但是没用=捕获的话没办法获取传入的值，不能像上面那样
 	}
 private:
 	int m = 0;
@@ -43,7 +43,6 @@ int main() {
 
 	[&a] {a = 100; std::cout << a << std::endl; }();
 
-	//这种方式不是引用，它是值捕获，可以避免过多拷贝和空引用，且外部的a并没有被改变
 	[ca=std::as_const(a)] ()mutable {ca = 10; std::cout << ca << std::endl; }();
 	std::cout << a << std::endl;
 
