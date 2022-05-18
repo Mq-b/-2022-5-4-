@@ -1,2 +1,2 @@
 # introduce
-2022-5-4创建，在此之前的三个仓库都被删除，人懒懒得上传之前的代码~~~~~~
+2022-5-4 created, the previous three repositories have been deleted by me, too lazy to upload the code written before
