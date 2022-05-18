@@ -1,3 +1,4 @@
+-- 先准备数据和表结构
 create table tb_user(
 	id int primary key auto_increment comment '主键',
 	name varchar(50) not null comment '用户名',
@@ -36,4 +37,22 @@ INSERT INTO itheima.tb_user (name, phone, email, profession, age, gender, status
 INSERT INTO itheima.tb_user (name, phone, email, profession, age, gender, status, createtime) VALUES ('后羿', '17799990022', 'altycj2000@139.com', '城市园林', 20, '1', '0', '2002-03-10 00:00:00');
 INSERT INTO itheima.tb_user (name, phone, email, profession, age, gender, status, createtime) VALUES ('姜子牙', '17799990023', '37483844@qq.com', '工程造价', 29, '1', '4', '2003-05-26 00:00:00');
 
--- 先准备数据
+-- 1.查询一张表的索引
+show index from tb_user;
+-- 可以在后面加上\G就会按照列的显示
+show index from tb_user\G;
+
+-- 2.为name字段创建索引		索引默认B+树数据结构
+create index idx_user_name on tb_user(name);
+
+-- 3.为phone创建唯一索引
+create unique index idx_user_phone on tb_user(phone);
+
+-- 4.为professiona age status建立合适的索引来提示查询效率
+create index idx_user_pro_age_sta on tb_user(profession,age,status);
+
+-- 5.为email建立合适的索引来提升查询效率
+create index idx_user_email on tb_user(email);
+
+-- 6.删除索引 比如下面是删除在tb_user表内的idex_user_email索引
+drop index idx_user_email on tb_user;
