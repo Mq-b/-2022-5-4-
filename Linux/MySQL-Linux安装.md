@@ -145,3 +145,4 @@ mysql -u root -p
 
 
 
+**systemctl restart mysqld**Linux下重启MySQL命令
