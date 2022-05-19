@@ -1,3 +1,6 @@
+---
+title: MySQL在Linux下配置环境
+---
 ## MySQL8.0.26-Linux版安装
 
 ### 1. 准备一台Linux服务器
