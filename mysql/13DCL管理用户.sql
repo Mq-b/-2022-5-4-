@@ -14,3 +14,5 @@ alter user 'heima'@'%' identified with mysql_native_password by '1234';
 -- 删除itcast@localhost用户
 
 drop user 'itcast'@'localhost';
+
+
