@@ -22,4 +22,12 @@ show index from tb_user;
 -- 第一个字段)必须存在，与我们编写SQL时，条件编写的先后顺序无关。   比如下面这个
 explain select * from tb_user where age = 31 and status = '0' and profession = '软件工程';
 
+
+-- 联合索引中，出现范围查询(>,<)，范围查询右侧的列索引失效。
+explain select * from tb_user where profession = '软件工程' and age > 30 and status = '0'; -- 失效索引
+
+explain select * from tb_user where profession = '软件工程' and age >= 30 and status = '0';
+-- 当范围查询使用>= 或 <= 时，走联合索引了，但是索引的长度为54，就说明所有的字段都是走索引的。
+-- 所以，在业务允许的情况下，尽可能的使用类似于 >= 或 <= 这类的范围查询，而避免使用 > 或 <
+
 -- 最后强调一下这个最左是指的使用index查询语句查询到的联合索引的id为1的第一个出现的就是最左索引
