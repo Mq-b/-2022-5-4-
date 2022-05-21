@@ -3,7 +3,7 @@ class MySQL:
     def connect(self,host_='',port_=3306,user_='root',passwd_='123456',db_='itcast',charset_='utf8'):  #连接数据库
         try:
             db = pymysql.connect(
-                host=host_,       #本机连接ip可不写
+                host=host_,       #主机连接本机可不写
                 port=port_,       #端口号默认都这个
                 user=user_,       #mysql的用户名
                 passwd=passwd_,   #密码
@@ -15,13 +15,21 @@ class MySQL:
             raise Exception("数据库连接失败")
 
     def implement(self,SQL):  #执行SQL语句的函数
-        db = self.connect() #连接数据库
+        db = self.connect()   #连接数据库
         cursor = db.cursor() #返回一个数据库的光标
         try:
-            cursor.execute(SQL)  #开始事务
-            db.commit()          #提交事务
-            for i in cursor.fetchall(): #打印数据 fetchall返回一个含有所有数据的元组
-                print(i)
+            for i in range(len(SQL)):   #循环遍历SQL语句
+                sql=SQL[i]
+                if sql[0:6]=='select' or sql[0:4]=='show':
+                    cursor.execute(SQL[i])  #开始事务
+                    db.commit()             #提交事务
+                    for j in cursor.fetchall():  # 打印数据 fetchall返回一个含有所有数据的元组
+                        print(j)
+                else:
+                    cursor.execute(SQL[i])  # 开始事务
+                    db.query('update emp set name=\'柳岩100\' where name=\'牛马\'')
+                    db.commit()             # 提交事务
+
         except Exception:
             db.rollback()    #如果执行失败就必须回滚到事务执行之前的状态
             print("查询失败")
