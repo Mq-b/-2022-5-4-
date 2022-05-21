@@ -1,11 +1,9 @@
 import pymysql
 class MySQL:
-    def __init__(self):
-        self.connect()
     def connect(self,host_='',port_=3306,user_='root',passwd_='123456',db_='itcast',charset_='utf8'):  #连接数据库
         try:
             db = pymysql.connect(
-                host=host_,       #主机连接本机可不写
+                host=host_,       #本机连接ip可不写
                 port=port_,       #端口号默认都这个
                 user=user_,       #mysql的用户名
                 passwd=passwd_,   #密码
@@ -16,16 +14,16 @@ class MySQL:
         except Exception:
             raise Exception("数据库连接失败")
 
-    def implement(self,SQL):    #执行SQL语句
-        db = self.connect()
-        cursor = db.cursor()
+    def implement(self,SQL):  #执行SQL语句的函数
+        db = self.connect() #连接数据库
+        cursor = db.cursor() #返回一个数据库的光标
         try:
-            cursor.execute(SQL)
-            db.commit()
+            cursor.execute(SQL)  #开始事务
+            db.commit()          #提交事务
             for i in cursor.fetchall(): #打印数据 fetchall返回一个含有所有数据的元组
                 print(i)
         except Exception:
-            db.rollback()
+            db.rollback()    #如果执行失败就必须回滚到事务执行之前的状态
             print("查询失败")
-        cursor.close()
-        db.close()
+        cursor.close()  #光标就是迭代器 先关闭在数据里的
+        db.close()  #关闭和数据库的连接
