@@ -1,4 +1,5 @@
 import pymysql
+import os
 class MySQL:
     def connect(self,host_='',port_=3306,user_='root',passwd_='123456',db_='itcast',charset_='utf8'):  #连接数据库
             db = pymysql.connect(
@@ -13,7 +14,7 @@ class MySQL:
 
     def implement(self,SQL):  #执行SQL语句的函数
         db = self.connect()   #连接数据库
-        cursor = db.cursor()  #返回一个数据库的光标
+        cursor = db.cursor() #返回一个数据库的光标
         try:
             for i in range(len(SQL)):   #循环遍历SQL语句
                 sql=SQL[i]
@@ -24,9 +25,7 @@ class MySQL:
                         print(j)
                 else:
                     cursor.execute(SQL[i])  #开始事务
-                    db.query(SQL[i])        #执行SQL
                     db.commit()             # 提交事务
-
         except Exception:
             db.rollback()    #如果执行失败就必须回滚到事务执行之前的状态
             print("查询失败")
