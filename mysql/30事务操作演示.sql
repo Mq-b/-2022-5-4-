@@ -51,5 +51,5 @@ commit ;
 -- 回滚事务
 rollback ;
 
--- 第一种方式是关闭事务掉自动提交，通过commint提交事务，rollback回滚事务
+-- 第一种方式是关闭掉自动提交，通过commint提交事务，rollback回滚事务
 -- 第二种方式是通过指令start transaction;如果事务执行成功，就执行commit ;指令，反之执行rollback ;
