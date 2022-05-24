@@ -7,7 +7,7 @@ begin
     declare upro  varchar(100);
     declare u_cursor cursor for select name,profession from tb_user where age<=uage;    -- 要先声明局部变量才能声明游标
     declare exit handler for SQLSTATE '02000'close u_cursor;       -- 满足02000状态码就执行退出处理 关闭游标 个人觉得像捕获处理异常
-    declare exit handler for not found u_cursor;         -- 和上面一句一样 not found表示的是02开头的状态码   都是条件处理程序
+    declare exit handler for not found close u_cursor;         -- 和上面一句一样 not found表示 没有找到   都是条件处理程序
     drop table if  exists tb_user_pro;      -- 表如果已经存在就先删除
     create table if not exists tb_user_pro(
         id int primary key auto_increment,
