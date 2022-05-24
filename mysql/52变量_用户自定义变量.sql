@@ -12,3 +12,5 @@ select count(*) into @mycount from tb_user;     -- 查询结果赋值给自定�
 select @myname,@myage,@mygender,@myhobby;
 
 select @mycolor,@mycount;
+
+-- 用户自定义变量可以不声明
