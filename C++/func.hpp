@@ -1,5 +1,6 @@
-#ifndef FUNC_H
-#define FUNC_H
+#ifndef FUNC_HPP
+#define FUNC_HPP
+#pragma once
 #pragma warning(disable:4996)
 #include<vector>
 #include<algorithm>
