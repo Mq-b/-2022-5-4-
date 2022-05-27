@@ -682,3 +682,8 @@ xh xq:土匪
 8.    passwd wk
 9.    passwd bj
 10.   passwd ss
+
+### 88.在Linux下编写执行C/C++代码
+1. 如何编写创建就不说了 如果编写好了源代码 
+2. 输入`gcc 文件名`就编译完成
+3. 默认是a.out 只需要输入`./a.out就能编译完成`

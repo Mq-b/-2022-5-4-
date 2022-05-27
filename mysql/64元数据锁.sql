@@ -1,0 +1,1 @@
+-- select object_type,object_schema,object_name,lock_type,lock_duration from performance_schema.metadata_locks ;
