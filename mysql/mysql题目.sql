@@ -56,3 +56,6 @@ on s.s_id=t1.s_id;  -- on条件的意思就是确保依次查询每一个学生�
 select count(*) cnt_nameli
 from teacher
 where t_name like '李%';
+
+-- 当前读 表示读取最新的数据 默认我们开启事务的时候查询到的数据就被定格 也就是快照读了 不管数据发生什么改变 我们读取到的都是一样的
+select * from stu lock in share mode;
