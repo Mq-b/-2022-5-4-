@@ -797,3 +797,7 @@ xh xq:土匪
 3. 统计/opt文件夹下文件的个数 包括子文件夹里的`ls -lR /opt | grep "^." | wc -l`
 4. 统计/opt文件夹下目录的个数 包括文件夹里的`ls -lR /opt | grep "^d" | wc -l`   这两个都是只是把`ls -l`改成`ls -lR`
 5. 以树状显示目录结构tree目录 **如果没有tree 使用`yum install tree`安装**   安装好后输入`tree /opt`即可
+
+### 105.ping测试主机之间的网络连通性
+1. 基本语法 `ping 目的主机` 功能描述:测试当前服务器是否可以连接目的主机
+    ==顺带提一句 `ifconfig`是Linux显示网络ip等状态的命令 `ipconfig`是Windows平台的==
