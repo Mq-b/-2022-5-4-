@@ -9,9 +9,6 @@ private:
 };
 Test* Test::t = new Test;
 
-class Demo {
-	Demo();
-};
 int main() {
 	Test* T = Test::t;
 	Test* T2 = Test::t;
