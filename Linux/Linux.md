@@ -801,3 +801,12 @@ xh xq:土匪
 ### 105.ping测试主机之间的网络连通性
 1. 基本语法 `ping 目的主机` 功能描述:测试当前服务器是否可以连接目的主机
     ==顺带提一句 `ifconfig`是Linux显示网络ip等状态的命令 `ipconfig`是Windows平台的==
+
+### 106.Linux网络环境配置
+#### 第二种方法(指定ip)
+1. 说明
+    直接修改配置文件来指定IP 并可以连接到外网
+    编辑`vim /etc/sysconfig/network-scripts/ifcfg-ens33`
+    要求:将ip地址配置的静态的 比如:ip地址为192.168.200.130
+2. ifcfg-ens33文件说明
+    DEVICE=eth0
