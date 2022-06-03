@@ -860,9 +860,13 @@ xh xq:土匪
 
 
 ### 109.2 ==查看进程树==：**pstree [选项]**
-    `-p`：显示进程的PID
-    `-u`：显示进程的所属用户
-服务（service）管理
+`-p`：显示进程的PID ``
+`-u`：显示进程的所属用户
+#### 应用实例
+1. 以树状的形式显示进程的pid`pstree -p`
+2. 请你树状的形式进程的用户`pstree -u`  其实直接`pstree root`也行
+
+### 110服务（service）管理
     service管理指令：`service 服务名 [start | stop | restart | reload | status]`
     在CentOS7.0之后，不再使用service，而是systemctl
     查看防火墙情况：
