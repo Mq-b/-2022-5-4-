@@ -867,39 +867,51 @@ xh xq:土匪
 2. 请你树状的形式进程的用户`pstree -u`  其实直接`pstree root`也行
 
 ### 110服务（service）管理
-    service管理指令：`service 服务名 [start | stop | restart | reload | status]`
-    在CentOS7.0之后，不再使用service，而是systemctl
-    查看防火墙情况：
-        `service iptables status`
-        `systemctl status firewalld（7.0之后的版本）`
-    测试某个端口是否在监听：telnet
-    查看服务名：
-        方式1：使用setup->系统服务就可以看到
-        方式2：`/etc/init.d/服务名称`
-    服务的运行级别（runlevel）：
-        查看或修改默认级别：`vim /etc/inittab`
-        每个服务对应的每个运行级别都可以设置
-    如果不小心将默认的运行级别设置成0或者6，怎么处理？
-        进入单用户模式，修改成正常的即可。
-    `chkconfig`：可以给每个服务的各个运行级别设置自启动/关闭
-    查看xxx服务：`chkconfig –list | grep xxx`
-    查看服务的状态：`chkconfig 服务名 --list`
-    给服务的运行级别设置自启动：`chkconfig –level 5 服务名 on/off`
-    要所有运行级别关闭或开启：`chkconfig 服务名 on/off`
-动态监控进程
-    `top [选项]`
-    top和ps命令很相似。它们都用来显示正在执行的进程。top和ps最大的不同之处在于top在执行一段时间可以更新正在运行的进程。
-    `-d` 秒数：指定top命令每隔几秒更新。默认是3秒。
-    `-i`：使top不显示任何闲置或者僵死进程。
-   ` -p`：通过指定监控进程ID来仅仅监控某个进程的状态。
-    案例1：监控特定用户：top查看进程；u输入用户名。
-    案例2：终止指定的进程：top查看进程；k输入要结束的进程。
-    案例3：指定系统状态更新的时间（每隔10秒自动更新，默认是3秒）：`top -d 10`
-    交互操作说明：
-        `P`：以CPU使用率排序，默认就是此项
-        `M`：以内存的使用率排序
-        `N`：以PID排序
-        `q`：退出top
+service管理指令：`service 服务名 [start | stop | restart | reload | status]`
+在CentOS7.0之后，不再使用service，而是systemctl
+1. 查看防火墙情况：
+    `service iptables status`
+    `systemctl status firewalld（7.0之后的版本）`
+2. 查看网络状态
+    `service network status`
+3. 关闭网络服务
+    `service network stop`
+4. 开启网络服务
+    `service network start`
+5. 重启网络服务
+    `service network restart`
+测试某个端口是否在监听：**telnet**
+#### 查看服务名：
+方式1：使用`setup 选择系统服务`就可以看到所有的系统服务
+方式2：`/etc/init.d/服务名称`
+
+### 111服务的运行级别（runlevel）：
+查看或修改默认级别：`vim /etc/inittab`
+查看当前的默认运行级别
+    `systemctl get-default`
+每个服务对应的每个运行级别都可以设置
+如果不小心将默认的运行级别设置成0或者6，怎么处理？
+    进入单用户模式，修改成正常的即可。
+`chkconfig`：可以给每个服务的各个运行级别设置自启动/关闭
+查看xxx服务：`chkconfig –list | grep xxx`
+查看服务的状态：`chkconfig 服务名 --list`
+给服务的运行级别设置自启动：`chkconfig –level 5 服务名 on/off`
+要所有运行级别关闭或开启：`chkconfig 服务名 on/off`
+
+### 112动态监控进程
+`top`[选项]`
+top和ps命令很相似。它们都用来显示正在执行的进程。top和ps最大的不同之处在于top在执行一段时间可以更新正在运行的进程。
+`-d` 秒数：指定top命令每隔几秒更新。默认是3秒。
+`-i`：使top不显示任何闲置或者僵死进程。
+`-p`：通过指定监控进程ID来仅仅监控某个进程的状态。
+案例1：监控特定用户：top查看进程；u输入用户名。
+案例2：终止指定的进程：top查看进程；k输入要结束的进程。
+案例3：指定系统状态更新的时间（每隔10秒自动更新，默认是3秒）：`top -d 10`
+交互操作说明：
+    `P`：以CPU使用率排序，默认就是此项
+    `M`：以内存的使用率排序
+    `N`：以PID排序
+    `q`：退出top
 监控网络状态
     `netstat [选项]`
     `-an`：按一定顺序排列输出
