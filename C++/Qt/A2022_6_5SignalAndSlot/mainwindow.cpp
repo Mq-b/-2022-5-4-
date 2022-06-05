@@ -15,7 +15,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_girl,&GirlFriend::hungry,this,&MainWindow::eatSlot);
     //信号连接槽函数
     //connect(ui->hungry,&QPushButton::clicked,this,&MainWindow::hungrySlot);
-
     /*hungry按钮被点击后就发射QPushButton的clicked信号 由this也就是当前窗口接收 执行槽函数hungrySlot
     然后发射自定义信号hungry 发射信号之后右被检测到了 调用Me对象的eat方法 执行  也就是13行的代码*/
 
