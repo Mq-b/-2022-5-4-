@@ -95,6 +95,7 @@ title: Linux常用指令 2022_5_15 - 2022_5_18
 命令:`init 数字`比如`init 3`就是没有图形界面的有网络情况，命令行，还可以输入`init 5`回到之前状态
 `systemctl get-default`查看当前的运行级别
 `systemctl set-default multi-user.target`更改默认级别为3，也就是命令行了，输入用户和密码进入后，输入`init 5`回到图形界面即可
+`systemctl set-default graphical.target`更改默认运行级别为5
 
 ### 35. 找回root密码，看老韩文档
 
