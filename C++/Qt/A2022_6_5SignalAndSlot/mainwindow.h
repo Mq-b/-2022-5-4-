@@ -16,6 +16,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void hungrySlot();
+    void eatSlot();
 
 private:
     Ui::MainWindow *ui;
