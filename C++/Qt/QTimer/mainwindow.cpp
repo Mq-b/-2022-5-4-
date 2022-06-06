@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     //创建定时器
     QTimer* timer = new QTimer;
 
-    //修改定时器对象的精度
+    //修改定时器对象的精度    在底层是枚举 有三种精度 我们这里使用的0试图保证毫秒的误差 1会试图使精确度保持在所需间隔的5%以内 2会只能保证秒级误差
     timer->setTimerType(Qt::PreciseTimer);
 
     //按钮的点击事件
@@ -27,9 +27,15 @@ MainWindow::MainWindow(QWidget *parent)
         else
         {
             ui->loopBtn->setText("关闭");
-            timer->start(1000); //1000ms == 1s
+            timer->start();
+            //start方法还有一个重载void QTimer:: start ( int msec )
+            //以msec毫秒的超时间隔启动或重新启动计时器。 也就是说 如果我写了1000作为参数 那么每次需要隔一秒 计时器才会重新被启动
+            //如果计时器已经在运行，它将停止并重新启动。
+            //timer->start(1000);//1000ms == 1s
         }
     });
+    //timer如果想要触发这种信号 必须保证的是它计时器正在运行
+    //timer是信号的发出者 然后它的timeout是发出的信号，它是根据时间的变化触发信号发射 然后this也就是当前进行接收  然后lambda就是执行的行为
     connect(timer,&QTimer::timeout,this,[=]()
     {
         QTime tm = QTime::currentTime();
