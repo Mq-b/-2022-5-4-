@@ -44,10 +44,10 @@ MainWindow::MainWindow(QWidget *parent)
         ui->curTime->setText(tmstr);
     });
 
-    //发射一次信号
+    //发射一次信号    点击一下按钮 触发lambda行为   
     connect(ui->onceBtn,&QPushButton::clicked,this,[=]()
     {
-        //获取两秒以后的系统时间
+        //这个静态函数在一个给定时间间隔 msec(毫秒) 之后调用一个槽 不会重复调用。  目的:获取两秒以后的系统时间
        QTimer::singleShot(2000,this,[=]()
        {
            QTime tm = QTime::currentTime();
