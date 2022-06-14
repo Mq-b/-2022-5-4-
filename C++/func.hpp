@@ -88,7 +88,7 @@ namespace sort_ {
 	//变参变量模板
 	template<auto... args>
 	constexpr auto Mul_ = (...*args);
-	//位运算交换
+	//位运算交换，像傻子一样
 	void swap(auto& a, auto& b) {
 		a ^= b;
 		b ^= a;
