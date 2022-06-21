@@ -917,3 +917,14 @@ top和ps命令很相似。它们都用来显示正在执行的进程。top和ps�
     `netstat [选项]`
     `-an`：按一定顺序排列输出
     `-p`：显示哪个进程在调用
+
+## Shell
+### 第一个Shell
+1. 打印一个hello Word
+    使用vim写一个hell.sh文件
+```Shell
+    #bin/bash
+echo "Hello Word"
+```
+默认权限不够，提升权限`chmod u+x hello.sh`
+然后执行:`./hello.sh`
