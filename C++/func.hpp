@@ -881,4 +881,17 @@ public:
 private:
 	T arr[size_];
 };
+
+namespace stdl = std::ranges;//命名空间别名
+class Test {
+public:
+	 auto number()->std::initializer_list<int> const {
+		return { 1,2,3,4,5,6,7,8,9,10 };
+	}
+};
+
+template<typename T,typename A>//模板推导绑定成员函数
+void test(T f,A func) {
+	stdl::copy((f->*func)(), std::ostream_iterator<int>{std::cout, " "});
+}
 #endif
