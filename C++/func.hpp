@@ -894,4 +894,49 @@ template<typename T,typename A>//模板推导绑定成员函数
 void test(T f,A func) {
 	stdl::copy((f->*func)(), std::ostream_iterator<int>{std::cout, " "});
 }
+
+//线程安全的栈容器类
+struct empty_stack :std::exception
+{
+	const char* what()noexcept { return ""; }
+};
+template<typename T>
+class threadsfe_stack {
+private:
+	std::stack<T>data;
+	mutable std::mutex m;
+public:
+	threadsfe_stack(){}
+	threadsfe_stack(const threadsfe_stack& other)
+	{
+		std::lock_guard<std::mutex>lock(other.m);
+		data = other.data;
+	}
+	threadsfe_stack& operator=(const threadsfe_stack&) = delete;
+	void push(T new_value)
+	{
+		std::lock_guard<std::mutex>lock(m);
+		data.push(std::move(new_value));
+	}
+	std::shared_ptr<T>pop()
+	{
+		std::lock_guard<std::mutex>lock(m);
+		if (data.empty())throw empty_stack();
+		std::shared_ptr<T>const res(std::make_shared<T>(data.top()));
+		data.pop();
+		return res;
+	}
+	void pop(T& value)
+	{
+		std::lock_guard<std::mutex>lock(m);
+		if (data.empty())throw empty_stack();
+		value = data.top();
+		data.pop();
+	}
+	bool empty()const
+	{
+		std::lock_guard<std::mutex>lock(m);
+		return data.empty();
+	}
+};
 #endif
