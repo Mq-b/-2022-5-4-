@@ -1037,5 +1037,8 @@ public:
 		std::lock_guard<std::mutex>lk(mut);
 		return data_queue.empty();
 	}
+	std::string operator"" s(unsigned long long value)noexcept {
+	return std::to_string(value);
+}
 };
 #endif
