@@ -1039,6 +1039,17 @@ public:
 	}
 	std::string operator"" s(unsigned long long value)noexcept {
 	return std::to_string(value);
-}
+	}
 };
+//数字转二进制O(log)
+std::string countOnes(unsigned int n,std::string& str) {
+	int ones = 0;
+	while (n > 0) {
+		ones = (1 & n);
+		str += std::to_string(ones);
+		n >>= 1;
+	}
+	std::ranges::reverse(str);//反转
+	return str;
+}
 #endif
