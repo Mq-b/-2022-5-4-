@@ -50,7 +50,7 @@ void readJson() {
 	std::ifstream ifs("test.json");
 	Json::Reader rd;
 	Json::Value root;
-	rd.parse(ifs, root);//将文件的数据写入root对象
+	rd.parse(ifs, root);//将文件的数据读取到root对象
 
 	if (root.isArray()) {//判断是否为json数组
 		for (auto i : root) {
