@@ -77,5 +77,6 @@ void MainWindow::readJson()
     }
 }
 //我们演示了将数据转换为json和解析json。解析json实际没这么复杂，我们只是演示了API
-//QJsonDocument我们只使用了一次，是将QJsonObject对象转换为QString然后写入文件。
+//QJsonDocument我们只使用了2次，1是28行将QJsonObject对象转换为QString然后写入文件。
+//2是44行将从文件读取的数据进行转换
 //Qt会自动将json按照升序排序
