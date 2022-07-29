@@ -9,7 +9,7 @@ public:
 		return t;
 	}
 private:
-	Test() = default;
+	Test() = delete;
 	Test(Test& a) = delete;
 	static Test* t;
 };
