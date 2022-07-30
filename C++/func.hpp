@@ -1054,10 +1054,8 @@ std::string countOnes(unsigned int n,std::string& str) {
 }
 
 //任意进制转10进制
-#include<iostream>
-#include<string>
 
-int main()
+void func()
 {
     int r,i=0,ans=0;
     std::string n;
@@ -1069,6 +1067,5 @@ int main()
         i++;
     }
     std::cout<<ans<<std::endl;
-    return 0;
  } 
 #endif
