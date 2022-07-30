@@ -1045,11 +1045,30 @@ public:
 std::string countOnes(unsigned int n,std::string& str) {
 	int ones = 0;
 	while (n > 0) {
-		ones = (1 & n);
+		ones = (1 & n);//取数字n的最后一位，只会是0或者1,1表示最后一位是奇数，0则不是
 		str += std::to_string(ones);
 		n >>= 1;
 	}
 	std::ranges::reverse(str);//反转
 	return str;
 }
+
+//任意进制转10进制
+#include<iostream>
+#include<string>
+
+int main()
+{
+    int r,i=0,ans=0;
+    std::string n;
+    std::cin>>r>>n;//R表示进制,N表示要转换的数，ans表示要转换的结果。
+    while(n.size()!=i)
+    {
+        ans*=r;       //我这里是把1看成0，把0看成1来算的。这样比较方便。其实都一样。
+        ans+=n[i]-'0';
+        i++;
+    }
+    std::cout<<ans<<std::endl;
+    return 0;
+ } 
 #endif
