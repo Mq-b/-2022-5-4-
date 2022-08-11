@@ -1068,4 +1068,9 @@ void func()
     }
     std::cout<<ans<<std::endl;
  } 
+//使用方法min(1,2,3,4,5,6,7,8,9)即可返回最小的
+template<typename...Ts>
+auto min(Ts&&... xs) {
+	return std::min({ std::forward<Ts>(xs)... }, std::less<>());	//这里用不用forward都行，使用的是min的std::initializer_list重载版本，直接构造了一个
+}
 #endif
