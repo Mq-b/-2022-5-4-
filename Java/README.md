@@ -4,4 +4,4 @@
 
 ### [拼图游戏](https://github.com/13870517674/JigsawPuzzle)
 
-### [gitee的java基础][https://gitee.com/han-yafeng/java2022_7_30]
+### [gitee的java基础](https://gitee.com/han-yafeng/java2022_7_30)
