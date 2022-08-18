@@ -9,3 +9,5 @@
 #### [正则表达式](https://github.com/13870517674/-2022-5-4-/blob/main/C%2B%2B/Markdown%E6%96%87%E6%A1%A3/Markdown/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.md)
 
 #### [句柄](https://github.com/13870517674/-2022-5-4-/blob/main/C++/Markdown%E6%96%87%E6%A1%A3/Markdown/%E5%8F%A5%E6%9F%84.md)
+
+#### [同步异步堵塞问题](https://github.com/13870517674/-2022-5-4-/blob/main/C%2B%2B/Markdown%E6%96%87%E6%A1%A3/Markdown/%E9%9D%9E%E5%90%8C%E6%AD%A5%E9%98%BB%E5%A1%9E%EF%BC%8C%E5%90%8C%E6%AD%A5%E9%98%BB%E5%A1%9E%EF%BC%8C%E5%BC%82%E6%AD%A5%E9%98%BB%E5%A1%9E%EF%BC%8C%E5%BC%82%E6%AD%A5%E9%9D%9E%E9%98%BB%E5%A1%9E.md)
