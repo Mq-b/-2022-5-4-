@@ -17,14 +17,14 @@ void sys_err(const char*str){
 
 int main(){
     int lfd=0,cfd;
-    char buf[BUFSIZ];
+    char buf[BUFSIZ],client_IP[1024];
     int ret=0;
     struct sockaddr_in serv_addr,clit_addr;//创建结构体并初始化
     socklen_t clit_addr_len;
 
     serv_addr.sin_family=AF_INET;
-    serv_addr.sin_port=htons(SERV_PORT);
-    serv_addr.sin_addr.s_addr=htonl(INADDR_ANY);
+    serv_addr.sin_port=htons(SERV_PORT);//端口
+    serv_addr.sin_addr.s_addr=htonl(INADDR_ANY);//IP，这个宏表示任意IP
 
     lfd=socket(AF_INET,SOCK_STREAM,0);//第一个参数表示使用IPv4地址，tcp或udp协议，第二个参数表示使用tcp协议，0表示默认协议。返回指向新创建的socket的文件描述符，和文件操作差不多
     if(lfd==-1){
@@ -36,10 +36,13 @@ int main(){
     listen(lfd,128);//listen()函数用于服务器，使已绑定的socket等待监听客户端的连接请求，并设置服务器同时可连接的数量，第二个参数就是数量
 
     clit_addr_len=sizeof(clit_addr);
-    cfd=accept(lfd,(struct sockaddr*)&clit_addr,&clit_addr_len);//三方握手完成后，服务器调用accept()接受连接
+    cfd=accept(lfd,(struct sockaddr*)&clit_addr,&clit_addr_len);//三方握手完成后，服务器调用accept()接受连接，如果没有客户端连接就会阻塞到这里，直到有客户端
     if(cfd==-1){
         sys_err("accept error");
     }
+    printf("client ip:%s port:%d\n",inet_ntop(AF_INET,&clit_addr.sin_addr.s_addr,client_IP,1024),
+            ntohs(clit_addr.sin_port));//打印ip地址和端接口
+
     while(1){
     ret=read(cfd,buf,sizeof(buf));
     write(STDOUT_FILENO,buf,ret);//先将读取到的输出到屏幕一下
