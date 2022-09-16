@@ -26,7 +26,6 @@ namespace Cshap
         }
         static void Main(string[] args)
         {
-            //将输入字符编码换成utf16，因为当你系统开启支持Unicode 终端将以utf8显示，但是powershell读取字符串内部转换为utf16再传递给net api，所以我们只需要改变输入字符编码
             Console.InputEncoding = Encoding.Unicode;
             //Console表示控制台应用程序的标准输入流、输出流和错误流。 此类不能被继承
             Console.WriteLine("Hello,Word");
