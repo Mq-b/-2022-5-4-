@@ -94,6 +94,15 @@ namespace Cshap
 
 只能在同一个程序集中被访问，而同一个程序集表示同一个dll程序集或同一个exe程序集。如果我们另一个程序使用了internal修饰的类生成的dll，那么就是错误的。
 
+#### 编码问题处理
+
+将输入字符编码换成utf16，因为当你系统开启支持Unicode 终端将以utf8显示，但是powershell读取字符串内部转换为utf16再传递给net api，所以我们只需要改变输入字符编码，在Main第一行加上:
+``` C#
+Console.InputEncoding = Encoding.Unicode;
+```
+
+            
+
 **Test继承多态的实现如下**
 
 ``` C#
