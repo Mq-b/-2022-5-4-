@@ -160,7 +160,7 @@ namespace Cshap2
 
 ```
 
-### C#泛型(泛型方法，泛型类)，以及ref引用传递
+### C#泛型(泛型方法，泛型类，数组)，以及ref引用传递
 
 ``` C#
 namespace Cshap3
@@ -226,5 +226,29 @@ namespace Cshap3
 }
 
 ```
+
+#### 泛型和数组
+
+``` C#
+        static void Main()
+        {
+            int[] arr = { 0, 1, 2, 3, 4 };
+            List<int> list = new List<int> { 5, 6, 7, 8, 9 };
+            ProcessItems(arr);
+            ProcessItems(list);
+        }
+        static void ProcessItems<T>(IList<T> coll)
+        {
+            // IsReadOnly:为数组返回 True，为列表返回 False。
+            System.Console.WriteLine("IsReadOnly returns {0} for this collection.", coll.IsReadOnly);
+            foreach (T item in coll)
+            {
+                System.Console.Write(item.ToString() + " ");
+            }
+            System.Console.WriteLine();
+        }
+```
+
+注意，这里的IList表示可按照索引单独访问的对象的集合，自然可以接收数组或list等
 
 只是基本使用，最好还需参考[**微软文档**](https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/generics/generic-interfaces)
