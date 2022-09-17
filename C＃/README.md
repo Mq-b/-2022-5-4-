@@ -160,7 +160,33 @@ namespace Cshap2
 
 ```
 
-### C#泛型(泛型方法，泛型类，数组)，以及ref引用传递
+### 接口
+``` C#
+interface IMyInterface
+{
+        // 接口成员
+    void MethodToImplement();
+}
+
+class InterfaceImplementer : IMyInterface
+{
+    static void Main()
+    {
+        InterfaceImplementer iImp = new InterfaceImplementer();
+        iImp.MethodToImplement();
+    }
+
+    public void MethodToImplement()
+    {
+        Console.WriteLine("MethodToImplement() called.");
+    }
+```
+
+C#. 接口（Interface）. 接口定义了所有类继承接口时应遵循的语法合同。. 接口定义了语法合同 "是什么" 部分，派生类定义了语法合同 "怎么做" 部分。. 接口定义了属性、方法和事件，这些都
+
+是接口的成员。. 接口只包含了成员的声明。. 成员的定义是派生类的责任。. 接口提供了派生类应遵循的标准结构。. 接口使得实现接口的类或结构在形式上保持一致
+
+### C#泛型(泛型方法，泛型类，泛型接口，数组)，以及ref引用传递
 
 ``` C#
 namespace Cshap3
@@ -248,6 +274,35 @@ namespace Cshap3
             System.Console.WriteLine();
         }
 ```
+
+#### 泛型接口
+```
+interface IMyInterface<T>
+    {
+        // 接口成员
+        void MethodToImplement(T value);
+    }
+    class Test<T>:IMyInterface<int>
+    {
+        public T v;
+
+        public void MethodToImplement(int value)
+        {
+            Console.WriteLine("MethodToImplement() called. vaue= {0}", value);
+        }
+    }
+    class InterfaceImplementer
+    {
+        static void Main()
+        {
+            var test = new Test<string>();
+            test.v = "hello";
+            test.MethodToImplement(6);
+            Console.WriteLine(test.v);
+        }
+    }
+```
+这里是用泛型类继承实现泛型接口，普通的类也一样
 
 注意，这里的IList表示可按照索引单独访问的对象的集合，自然可以接收数组或list等
 
