@@ -100,7 +100,7 @@ namespace Cshap
 Console.InputEncoding = Encoding.Unicode;
 ```
 
-            
+​            
 
 **Test继承多态的实现如下**
 
@@ -186,7 +186,7 @@ C#. 接口（Interface）. 接口定义了所有类继承接口时应遵循的�
 
 是接口的成员。. 接口只包含了成员的声明。. 成员的定义是派生类的责任。. 接口提供了派生类应遵循的标准结构。. 接口使得实现接口的类或结构在形式上保持一致
 
-### C#泛型(泛型方法，泛型类，泛型接口，数组)，以及ref引用传递
+### C#泛型(泛型方法，泛型类，泛型接口，数组)，以及ref关键字引用传递
 
 ``` C#
 namespace Cshap3
@@ -275,7 +275,27 @@ namespace Cshap3
         }
 ```
 
+其实也可以直接用泛型函数来接数组
+
+```csharp
+static void f<T>(T[] c,T v)
+{
+    c[1] = v;
+}
+static void Main(string[] args)
+{
+    int[] ints = { 1, 2, 3, 4, 5, 6 };
+    f(ints, 10);
+    foreach(var i in ints){
+        Console.Write(i + " ");
+    }
+}
+```
+
+
+
 #### 泛型接口
+
 ``` C#
 interface IMyInterface<T>
     {
@@ -308,6 +328,8 @@ interface IMyInterface<T>
 
 只是基本使用，最好还需参考[**微软文档**](https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/generics/generic-interfaces)
 
+
+
 ### lambda 表达式
 
 将 lambda 表达式的输入参数括在括号中。 使用空括号指定零个输入参数：
@@ -333,6 +355,8 @@ Func<int, int, bool> testForEquality = (x, y) => x == y;
 ```csharp
 Func<int, string, bool> isTooLong = (int x, string s) => s.Length > x;
 ```
+
+
 
 Action是无返回值的lambda，Func是有返回值的lambda，Func中类型列表的最后一个类型表示的是它要返回的类型
 
