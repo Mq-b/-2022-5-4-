@@ -276,7 +276,7 @@ namespace Cshap3
 ```
 
 #### 泛型接口
-```
+``` C#
 interface IMyInterface<T>
     {
         // 接口成员
