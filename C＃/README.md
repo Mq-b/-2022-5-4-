@@ -406,7 +406,7 @@ Action不需要指定返回值，那么它<>里面的类型也就对应着传入
 
 `static void A<T1,T2>(Action<T1,T2> c,T1 str,T2 num)`
 
-我们还需要注意一个非常重要的一点，我们不能只传入lambda，让lambda在函数里面再传参，那样是不行的，比如将调用的参数也通过泛型函数传入，比如:
+我们还需要注意一个非常重要的一点，我们不能只传入lambda，让lambda在函数里面再传参，那样是不行的，需要将调用的参数也传入，比如:
 
 ```csharp
 static void A<T1,T2>(Action<T1,T2> c)
