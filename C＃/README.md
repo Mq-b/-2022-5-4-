@@ -307,3 +307,91 @@ interface IMyInterface<T>
 注意，这里的IList表示可按照索引单独访问的对象的集合，自然可以接收数组或list等
 
 只是基本使用，最好还需参考[**微软文档**](https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/generics/generic-interfaces)
+
+### lambda 表达式
+
+将 lambda 表达式的输入参数括在括号中。 使用空括号指定零个输入参数：
+
+```csharp
+Action line = () => Console.WriteLine();
+```
+
+如果 lambda 表达式只有一个输入参数，则括号是可选的：
+
+```csharp
+Func<double, double> cube = x => x * x * x;
+```
+
+两个或更多输入参数使用逗号加以分隔：
+
+```csharp
+Func<int, int, bool> testForEquality = (x, y) => x == y;
+```
+
+有时，编译器无法推断输入参数的类型。 可以显式指定类型，如下面的示例所示：
+
+```csharp
+Func<int, string, bool> isTooLong = (int x, string s) => s.Length > x;
+```
+
+Action是无返回值的lambda，Func是有返回值的lambda，Func中类型列表的最后一个类型表示的是它要返回的类型
+
+将lambda作为参数传递给函数，使用泛型函数接收，如下:
+
+```csharp
+ 	internal class Program
+    {
+        static void F<T,T2>(Func<T,T2> f,T value)
+        {
+            Console.WriteLine(f(value));
+        }
+        static void Main(string[] args)
+        {
+            Func<double, double> cube = x => x * x * x;
+            Console.WriteLine(cube(5));
+            F(cube,100);
+        }
+    }
+```
+
+其实我们也可以直接像下面这样传参
+
+```csharp
+F(x => x * x * x, 100);
+```
+
+如果是传递Action，那就更简单了
+
+```csharp
+static void A<T1,T2>(Action<T1,T2> c,T1 str,T2 num)
+{
+    c(str,num);
+}
+//lambda定义和调用:
+Action<string,int> greet = (name,c) =>
+{
+    string greeting = $"Hello {name}!";
+    Console.WriteLine(greeting+c);
+};
+A(greet, "abcd", 66);
+```
+
+我们再总结一下Action与Func的区别，我们写泛型函数接Func的时候，因为Func的第一个类型是传入类型，所以我们的T就用了两次`static void F<T,T2>(Func<T,T2> f,T value)`
+
+Action不需要指定返回值，那么它<>里面的类型也就对应着传入的类型，也就是
+
+`static void A<T1,T2>(Action<T1,T2> c,T1 str,T2 num)`
+
+我们还需要注意一个非常重要的一点，我们不能只传入lambda，让lambda在函数里面再传参，那样是不行的，比如将调用的参数也通过泛型函数传入，比如:
+
+```csharp
+static void A<T1,T2>(Action<T1,T2> c)
+{
+    c("ha",6);
+}
+A(greet);
+```
+
+这样是**绝对不可以的**
+
+[微软文档](https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/operators/lambda-expressions)说明
