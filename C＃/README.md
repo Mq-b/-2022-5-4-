@@ -406,7 +406,7 @@ Action不需要指定返回值，那么它<>里面的类型也就对应着传入
 
 `static void A<T1,T2>(Action<T1,T2> c,T1 str,T2 num)`
 
-我们还需要注意一个非常重要的一点，我们不能只传入lambda，让lambda在函数里面再传参，那样是不行的，需要将调用的参数也传入，比如:
+我们还需要注意一个非常重要的一点，我们不能只传入lambda，让lambda在函数里面再传参，那样是不行的，比如将调用的参数也通过泛型函数传入，比如:
 
 ```csharp
 static void A<T1,T2>(Action<T1,T2> c)
@@ -419,3 +419,93 @@ A(greet);
 这样是**绝对不可以的**
 
 [微软文档](https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/operators/lambda-expressions)说明
+
+
+
+## WinForm入门图形界面GUI
+
+### 创建窗口与添加控件按钮点击
+
+Program.cs
+
+```csharp
+namespace WinForms01
+{
+    internal static class Program
+    {
+        /// <summary>
+        ///  The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.Run(new MyForm());
+        }
+    }
+}
+```
+
+Myform.cs
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WinForms01
+{
+    internal class MyForm:Form
+    {
+        private Button button1 = new Button();
+        private Button button2 = new Button(); 
+
+        public MyForm()
+        {
+            this.Text = "我的小窗口";//窗口名称
+            InitializeComponent();
+
+            this.Controls.Add(button2);//手动添加按钮
+            button2.Text = "手动添加的按钮";
+            button2.Location = new Point(40, 40);
+            button2.Size = new Size(100, 40);
+        }
+
+        private void InitializeComponent()
+        {
+            this.button1 = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(163, 89);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(104, 50);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "测试按钮";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // MyForm
+            // 
+            this.ClientSize = new System.Drawing.Size(481, 261);
+            this.Controls.Add(this.button1);
+            this.Name = "MyForm";
+            this.ResumeLayout(false);
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.button1.Text = "测试按钮被按下";
+        }
+    }
+}
+```
+
+我们既可以使用可视化的方式添加控件和修改属性，也可以自己写代码，我们使用可视化的方式修改后会自己生成代码。
+
+vs创建项目后悔自动生成两个这样的文件，我们是全部删了后自己写的
+
+我们给button1绑定了一个函数，当它按下的时候函数就会执行
