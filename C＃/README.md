@@ -424,7 +424,7 @@ A(greet);
 
 ## WinForm入门图形界面GUI
 
-### 创建窗口与添加控件按钮点击
+### 创建窗口与添加控件按钮事件点击和MessagBox
 
 Program.cs
 
@@ -467,9 +467,10 @@ namespace WinForms01
             InitializeComponent();
 
             this.Controls.Add(button2);//手动添加按钮
-            button2.Text = "手动添加的按钮";
+            button2.Text = "代码添加的按钮";
             button2.Location = new Point(40, 40);
             button2.Size = new Size(100, 40);
+            this.button2.Click += new System.EventHandler(this.oneClick);
         }
 
         private void InitializeComponent()
@@ -493,12 +494,16 @@ namespace WinForms01
             this.Controls.Add(this.button1);
             this.Name = "MyForm";
             this.ResumeLayout(false);
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.button1.Text = "测试按钮被按下";
+            MessageBox.Show("你点击了测试按钮");
+        }
+        private void oneClick(object sender,EventArgs e)
+        {
+            MessageBox.Show("代码写的按钮被你点击了");
         }
     }
 }
@@ -509,3 +514,7 @@ namespace WinForms01
 vs创建项目后悔自动生成两个这样的文件，我们是全部删了后自己写的
 
 我们给button1绑定了一个函数，当它按下的时候函数就会执行
+
+button1是使用图形化的方式创建的和双击添加的默认点击执行事件，button2是我们自己用代码实现的
+
+除了click的事件，还能写很多别的，在vs的属性界面有显示
