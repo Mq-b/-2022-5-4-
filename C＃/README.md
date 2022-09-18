@@ -518,3 +518,150 @@ vs创建项目后悔自动生成两个这样的文件，我们是全部删了后
 button1是使用图形化的方式创建的和双击添加的默认点击执行事件，button2是我们自己用代码实现的
 
 除了click的事件，还能写很多别的，在vs的属性界面有显示
+
+
+
+### 练习:显示时间
+
+先介绍**partial**
+
+C# 2.0 引入了局部类型的概念。局部类型允许我们将一个类、结构或接口分成几个部分，分别实现在几个不同的.cs文件中。
+
+局部类型适用于以下情况：
+
+(1) 类型特别大，不宜放在一个文件中实现。
+
+(2) 一个类型中的一部分代码为自动化工具生成的代码，不宜与我们自己编写的代码混合在一起。
+
+(3) 需要多人合作编写一个类。
+
+局部类型是一个纯语言层的编译处理，不影响任何执行机制——事实上C#编译器在编译的时候仍会将各个部分的局部类型合并成一个完整的类。
+
+如果使用vs创建默认的WinForm项目，那么它就是这样的，下面我们看代码实现
+
+
+
+Program.cs
+
+```csharp
+using System;
+using System.Windows.Forms;
+
+namespace WindowsForms02
+{
+    internal static class Program
+    {
+        /// <summary>
+        /// 应用程序的主入口点。
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
+        }
+    }
+}
+```
+
+Form1.cs 
+
+```csharp
+using System;
+using System.Windows.Forms;
+namespace WindowsForms02
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void OnButtonClick(object sender, EventArgs e)
+        {
+            string timeStr = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            timeField.Text = timeStr;
+        }
+    }
+}
+```
+
+Form1.Designer.cs
+
+```csharp
+namespace WindowsForms02
+{
+    partial class Form1
+    {
+        /// <summary>
+        /// 必需的设计器变量。
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// 清理所有正在使用的资源。
+        /// </summary>
+        /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows 窗体设计器生成的代码
+
+        /// <summary>
+        /// 设计器支持所需的方法 - 不要修改
+        /// 使用代码编辑器修改此方法的内容。
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.button1 = new System.Windows.Forms.Button();
+            this.timeField = new System.Windows.Forms.TextBox();
+            this.SuspendLayout();
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(213, 84);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(103, 32);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "显示时间";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.OnButtonClick);
+            // 
+            // timeField
+            // 
+            this.timeField.Location = new System.Drawing.Point(122, 142);
+            this.timeField.Name = "timeField";
+            this.timeField.Size = new System.Drawing.Size(294, 21);
+            this.timeField.TabIndex = 1;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(543, 281);
+            this.Controls.Add(this.timeField);
+            this.Controls.Add(this.button1);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox timeField;
+    }
+}
+```
+
+Form1.Designer.cs里面的代码其实就是我们在设计界面修改添加的控件与属性，Form1.cs 我们其实只是写了一个回调的函数
