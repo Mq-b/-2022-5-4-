@@ -32,7 +32,7 @@ void foo<double, void>()
 }
 ```
 
-模板经过编译器实例化后就是这样，我们可以看到这个函数第二个类型就是void了，这是因为std::enable_if_t<true>，会产生一个void，反之，如果不符合里面的条件，这里是sizeof(T) > 4，就是enable_if<false>
+模板经过编译器实例化后就是这样，我们可以看到这个函数第二个类型就是void了，这是因为`std::enable_if_t<true>`，会产生一个void，反之，如果不符合里面的条件，这里是`sizeof(T) > 4`，就是`enable_if <false>`
 
 enable_if<false>这个特化形式中，压根就没有这个::type，也就失败了，不会匹配上，当然这也不会error
 
