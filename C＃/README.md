@@ -1128,3 +1128,216 @@ namespace WinForms07
 }
 ```
 
+
+
+### 学生信息编辑保存Json
+
+Form1.Designer.cs
+
+```csharp
+namespace WinForms08
+{
+    partial class Form1
+    {
+        /// <summary>
+        ///  Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        ///  Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        ///  Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.idFiled = new System.Windows.Forms.TextBox();
+            this.nameField = new System.Windows.Forms.TextBox();
+            this.sexFiled = new System.Windows.Forms.TextBox();
+            this.phoneFiled = new System.Windows.Forms.TextBox();
+            this.button = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(152, 72);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(39, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "学号";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(152, 120);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(39, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "姓名";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(152, 176);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(39, 20);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "性别";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(136, 216);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(54, 20);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "手机号";
+            // 
+            // idFiled
+            // 
+            this.idFiled.Location = new System.Drawing.Point(256, 72);
+            this.idFiled.Name = "idFiled";
+            this.idFiled.Size = new System.Drawing.Size(168, 27);
+            this.idFiled.TabIndex = 4;
+            // 
+            // nameField
+            // 
+            this.nameField.Location = new System.Drawing.Point(256, 120);
+            this.nameField.Name = "nameField";
+            this.nameField.Size = new System.Drawing.Size(168, 27);
+            this.nameField.TabIndex = 5;
+            // 
+            // sexFiled
+            // 
+            this.sexFiled.Location = new System.Drawing.Point(256, 176);
+            this.sexFiled.Name = "sexFiled";
+            this.sexFiled.Size = new System.Drawing.Size(168, 27);
+            this.sexFiled.TabIndex = 6;
+            // 
+            // phoneFiled
+            // 
+            this.phoneFiled.Location = new System.Drawing.Point(256, 216);
+            this.phoneFiled.Name = "phoneFiled";
+            this.phoneFiled.Size = new System.Drawing.Size(168, 27);
+            this.phoneFiled.TabIndex = 7;
+            // 
+            // button
+            // 
+            this.button.Location = new System.Drawing.Point(137, 293);
+            this.button.Name = "button";
+            this.button.Size = new System.Drawing.Size(102, 36);
+            this.button.TabIndex = 8;
+            this.button.Text = "保存";
+            this.button.UseVisualStyleBackColor = true;
+            this.button.Click += new System.EventHandler(this.button_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(527, 367);
+            this.Controls.Add(this.button);
+            this.Controls.Add(this.phoneFiled);
+            this.Controls.Add(this.sexFiled);
+            this.Controls.Add(this.nameField);
+            this.Controls.Add(this.idFiled);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private TextBox idFiled;
+        private TextBox nameField;
+        private TextBox sexFiled;
+        private TextBox phoneFiled;
+        private Button button;
+    }
+}
+```
+
+Form1.cs
+
+```csharp
+using Newtonsoft.Json;
+using System.Net.Http.Json;
+using System.Text.Json.Serialization;
+
+namespace WinForms08
+{
+    class Student
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public bool Sex { get; set; }
+        public string Phone { get; set; }
+        public Student()
+        {
+
+        }
+        public Student(int Id, string Name, bool Sex, string Phone)
+        {
+            this.Id = Id;
+            this.Name = Name;
+            this.Sex = Sex;
+            this.Phone = Phone;
+        }
+    }
+        public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button_Click(object sender, EventArgs e)
+        {
+            Student stu = new Student();
+            stu.Id=Convert.ToInt32(idFiled.Text);
+            stu.Name=nameField.Text; 
+            stu.Phone = phoneFiled.Text;
+            stu.Sex = sexFiled.SelectedText != null;
+
+            //JSON支持
+            string jsonStr = JsonConvert.SerializeObject(stu);//序列化
+            JsonSerializer serializer = new JsonSerializer();
+            using (StreamWriter sw = new StreamWriter("json.json"))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                 serializer.Serialize(writer, jsonStr);
+            }
+        }
+    }
+}
+```
+
