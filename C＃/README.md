@@ -1007,3 +1007,124 @@ namespace WinForms06
 }
 ```
 
+
+
+### 列表框listBox
+
+Form1.Designer.cs
+
+```csharp
+namespace WinForms07
+{
+    partial class Form1
+    {
+        /// <summary>
+        ///  Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        ///  Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        ///  Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.SuspendLayout();
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "red"});
+            this.listBox1.Location = new System.Drawing.Point(200, 90);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.listBox1.Size = new System.Drawing.Size(262, 164);
+            this.listBox1.TabIndex = 0;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listBox1);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private ListBox listBox1;
+    }
+}
+```
+
+Form1.cs
+
+```csharp
+namespace WinForms07
+{
+    class Student
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public Student(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+        public override string ToString()//所有类型都隐式继承Object，这里是重写
+        {
+            return String.Format("{0}  {1}",Id,Name);
+        }
+    }
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            //列表框能添加任意类型，我们这里就使用自定义数据类型，它显示的结果就是ToString的
+            listBox1.Items.Add(new Student(1, "武庚"));
+            listBox1.Items.Add(new Student(2, "白菜"));
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string str=" ";
+            foreach(var i in listBox1.SelectedIndices)
+            {
+                str += i.ToString()+'\n';
+            }
+            MessageBox.Show("选中了: " + str);
+        }
+    }
+}
+```
+
