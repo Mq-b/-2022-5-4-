@@ -1341,3 +1341,17 @@ namespace WinForms08
 }
 ```
 
+### 资源文件
+
+资源文件的使用很简单，我们只需要点开项目的`Resources.resx`文件然后手动添加即可，这里是添加了一个图片
+
+添加后使用的代码:
+
+```csharp
+Bitmap photo = Properties.Resources.img;
+w = photo.Width;
+h = photo.Height;
+pictureBox1.Image = photo;//把图片放入到控件中
+```
+
+资源文件是直接打包到exe中，就算我们后来直接把图片删除也不影响exe运行
