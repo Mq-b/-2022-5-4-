@@ -20,6 +20,8 @@ int main() {
 }
 ```
 
-非const的成员函数内，lambda的=捕获的this指针自然就不是const的，那么成员变量自然可以修改，反之亦然。如果是函数局部的变量，若未加mutable，lambda的operator()亦然是const的，无法在lambda内修改
+非const的成员函数内，lambda的=捕获的this指针自然就不是const的，那么成员变量自然可以修改，反之亦然。如果是函数局部的变量，若未加mutable，lambda的operator()则是const的，无法在lambda内修改
+
+强调：const只是修改了this指针为const的，对于成员函数内局部变量的修改没有关系
 
 &引用捕获也是同理
