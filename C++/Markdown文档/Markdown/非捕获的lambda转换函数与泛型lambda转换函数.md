@@ -154,3 +154,7 @@ h(glambda);  // OK：调用 #1，因为 #2 不可转换
  
 int& (*fpi)(int*) = [](auto* a) -> auto& { return *a; }; // OK
 ```
+
+### [cppreference的说明](https://zh.cppreference.com/w/cpp/language/lambda)
+
+### [生成代码的网站](https://cppinsights.io/)
