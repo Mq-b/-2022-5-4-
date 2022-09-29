@@ -2,7 +2,7 @@
 
 我们不详细讲述lambda的基本知识
 
-我们都使用过lambda，一般来说 ，我们都是`auto x = [](){};`这样的语句去创建一个lambda，这样的lambda，auto推导的是一个匿名lambda类的对象类型，实则是实例化了一个lambda类的对象
+我们都使用过lambda，一般来说 ，我们都是`auto x = [](){};`这样的语句去创建一个lambda，这样的lambda，auto推导的是匿名lambda类的类型，也就是实例化了一个lambda类的对象
 
 如果不进行捕获，则lambda匿名类实则为空类，如果进行`sizeof x`的结果会为1,这些都没什么好说的
 
