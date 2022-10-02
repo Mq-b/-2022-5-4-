@@ -1,0 +1,73 @@
+## 1.简化模板函数传参需要写明类型的问题
+
+代码如下:
+```C++
+#include<iostream>
+template<class T, class ...Args>
+void ExecuteFunc(T f, Args&& ...args) {
+	f(args...);
+}
+
+template<class ...Args>
+void printer(Args... args)
+{
+	(std::cout << ... << args) << '\n';
+}
+```
+一段这样的代码非常的普通和简单，ExecuteFunc函数将传入的可变参数写为折叠表达式直接展开用于调用传入的f函数进行打印，我们如果要使用ExecuteFunc函数，需要写成下面这样
+
+```C++
+ExecuteFunc(printer<int,int,int,int>, 10, 20, 30, 40);
+```
+
+传入的printer需要写明参数类型，这十分麻烦，那么有什么办法简化呢？只需要像下面这样
+
+``C++
+struct Func {
+	template<class ...Args>
+	void operator()(Args... args)
+	{
+		(std::cout << ... << args) << '\n';
+	}
+};
+```
+万物以套娃为本，只需要把它包装成一个函数对象就好了，像下面这样调用
+
+```C++
+ExecuteFunc(Func(), 10, 20, 30, 40);
+```
+
+## [2解决提问](https://stackoverflow.com/questions/73923232/how-to-simplify-variable-parameter-template-functions/73924535#73924535)
+
+简化下面这段代码
+
+```C++
+#include<functional>
+#include<Windows.h>
+template<class T, class ...Args>
+decltype(auto) ExecuteFunc(LPVOID f, Args&& ...args) {
+    if (f != nullptr) {
+        return std::function<T>((T*)f)(std::forward<Args>(args)...);
+    }
+}
+int main(){
+ExecuteFunc<int(HWND, char*, char*, int)>(&MessageBoxA, (HWND)NULL, (char*)"Text", (char*)"caption", MB_OK);
+return 0;
+}
+```
+
+解决:
+
+```C++
+#include<functional>
+#include<Windows.h>
+template<class T, class ...Args>
+decltype(auto) ExecuteFunc(T f, Args&& ...args) {
+	f(args...);
+}
+
+int main() {
+	ExecuteFunc(std::function{ MessageBoxA }, (HWND)NULL, (char*)"Text", (char*)"caption", MB_OK);
+}
+```
+
