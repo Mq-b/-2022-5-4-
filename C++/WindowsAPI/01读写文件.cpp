@@ -16,5 +16,19 @@ int main() {
 
 	printf("%d\n", count);
 
+	//刷新指定缓冲区
+	FlushFileBuffers(hFile);
 	CloseHandle(hFile);
+
+	HANDLE hFile2 = CreateFile("1.txt", GENERIC_READ, 0, NULL, OPEN_EXISTING, NULL, NULL);
+	char buffer[64]{};
+	DWORD readCount = 0;
+	BOOL ret2 = ReadFile(hFile2, buffer, 64, &readCount, NULL);
+	if (false == ret2) {
+		exit(1);
+	}
+	
+	CloseHandle(hFile2);
+	printf("%s\n", buffer);
+
 }
