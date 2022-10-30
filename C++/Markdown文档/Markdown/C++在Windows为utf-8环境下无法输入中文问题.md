@@ -4,6 +4,8 @@
 	使用Windows的API可以正常
 	std的则不行
 
+可以使用下面两种方式
+
 ```c++
 #include <fcntl.h>
 #include<iostream>
