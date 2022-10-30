@@ -1,6 +1,8 @@
 # C++在Windows为utf-8环境下无法输入中文问题
 
-原因是:stdin 不支持utf8输入 但支持utf16,shell 支持utf8显示 但不支持显示utf16
+原因是:控制台本身是支持的utf-8输入，utf-16输出，但是stdout和stdin不支持
+	使用Windows的API可以正常
+	std的则不行
 
 ```c++
 #include <fcntl.h>
@@ -16,3 +18,15 @@ int main()
 }
 ```
 
+或者直接使用Windows的API
+```C++
+#include <iostream>
+#include<Windows.h>
+
+int main(){
+    DWORD dwChars;
+    TCHAR buf[64]{};
+    ReadConsole(GetStdHandle(STD_INPUT_HANDLE), buf, 99, &dwChars, nullptr);
+    WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), buf, lstrlen(buf), &dwChars, nullptr);
+}
+```
