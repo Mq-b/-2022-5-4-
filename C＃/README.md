@@ -422,6 +422,66 @@ A(greet);
 
 
 
+### 元组
+
+它使用非常的简单，我们直接举一个鸡兔同笼返回两个int的例子
+
+```c#
+private static (int,int) F()
+{
+    for(int i = 1; i < 35; i++)
+    {
+        for(int j =1; j < 35; j++)
+        {
+            int x = i * 2 + j * 4;
+            int y = i + j ;
+            if(x ==94&&y ==35)
+            {
+                return (i, j);
+            }
+        }
+    }
+    return (0, 0);
+}
+```
+
+
+
+### 可变参数
+
+```c#
+static void print<T>(params T[] list)
+{
+    foreach(var item in list)
+    {
+        Console.Write("{0} ",item);
+    }
+    Console.WriteLine();
+}
+
+static void print(params char[] list)//如果传递的是数组则为按引用传递
+{
+    for(int i = 0; i < list.Length; i++)
+    {
+        list[i] = '*';
+    }
+}
+
+static void Main(string[] args)
+{
+    print(1, 2, 3, 4, 5, 6);
+    print("1", "2", "3", "4", "5", "6");
+    char[] str = { '1', '2', '3', '4','5','6' };
+    Console.WriteLine(str);
+    print(str);
+    Console.WriteLine(str);
+}
+```
+
+
+
+---
+
 ## WinForm入门图形界面GUI
 
 ### 创建窗口与添加控件按钮事件点击和MessagBox
