@@ -480,7 +480,7 @@ static void Main(string[] args)
 
 
 
-泛型可变参数函数
+### dynamic关键词
 
 ```csharp
 internal class Program
