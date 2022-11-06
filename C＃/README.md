@@ -480,6 +480,60 @@ static void Main(string[] args)
 
 
 
+### 运算符重载
+
+```c++
+class Box
+{
+    private double length;      // 长度
+    private double breadth;     // 宽度
+    private double height;      // 高度
+
+    public Box(double length, double breadth, double height)
+    {
+        this.length = length;
+        this.breadth = breadth;
+        this.height = height;
+    }
+
+    public double getVolume()
+    {
+        return length * breadth * height;
+    }
+    public void setLength(double len)
+    {
+        length = len;
+    }
+    public void setBreadth(double bre)
+    {
+        breadth = bre;
+    }
+    public void setHeight(double hei)
+    {
+        height = hei;
+    }
+    public static Box operator +(Box b, Box c)
+    {
+        Box box = new Box(0,0,0);
+        box.length = b.length + c.length;
+        box.breadth = b.breadth + c.breadth;
+        box.height = b.height + c.height;
+        return box;
+    }
+
+```
+
+**C# 要求所有的运算符重载都声明为 public 和 static ， 这表示它们与其类或结构相关联， 而不是与某个特定实例相关联，所有运算符重载的代码体不能访问非静态类成员**
+
+|                        操作符                         |                     描述                     |
+| :---------------------------------------------------: | :------------------------------------------: |
+|            `+`, `-`, `!`, `~`, `++`, `--`             | 这些一元运算符需要一个操作数，并且可以重载。 |
+|                `+`, `-`, `*`, `/`, `%`                |  这些二进制运算符取一个操作数并且可以重载。  |
+|           `==`, `!=`, `<`, `>`, `<=`, `>=`            |           这些比较运算符都可以重载           |
+|                      `&&`, `//`                       |         条件逻辑运算符不能直接重载。         |
+|             `+=`， `-=`,`*=`，`/=`，`％=`             |            赋值运算符不能被重载。            |
+| `=`, `.`, `?:`, `->`, `new`, `is`, `sizeof`, `typeof` |             这些运算符不能重载。             |
+
 ---
 
 ## WinForm入门图形界面GUI
