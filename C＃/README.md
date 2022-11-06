@@ -480,6 +480,29 @@ static void Main(string[] args)
 
 
 
+泛型可变参数函数
+
+```csharp
+internal class Program
+{
+    public static void print(params dynamic[] dunamics)
+    {
+        foreach (dynamic dunamic in dunamics)//dynamic可以从object数组的元素得到真正的类型
+        {
+            Console.Write(dunamic);
+        }
+        Console.WriteLine();
+    }
+    static void Main(string[] args)
+    {
+        print(1, '*', 5.6, "哈哈");
+    }
+```
+
+dynamic是FrameWork4.0的新特性。dynamic的出现让C#具有了弱语言类型的特性。编译器在编译的时候不再对类型进行检查，编译期默认dynamic对象支持你想要的任何特性。比如，即使你对GetDynamicObject方法返回的对象一无所知，你也可以像如下那样进行代码的调用，编译器不会报错
+
+常有人会拿var这个关键字来和dynamic做比较。实际上，var和dynamic完全是两个概念，根本不应该放在一起做比较。var实际上是编译期抛给我们的“语法糖”，一旦被编译，编译期会自动匹配var 变量的实际类型，并用实际类型来替换该变量的申明，这看上去就好像我们在编码的时候是用实际类型进行申明的。而dynamic被编译后，实际是一个object类型，只不过编译器会对dynamic类型进行特殊处理，让它在编译期间不进行任何的类型检查，而是将类型检查放到了运行期。
+
 ### 运算符重载
 
 ```c++
