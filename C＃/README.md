@@ -559,6 +559,20 @@ class Box
 
 ---
 
+### C#断言和反射
+
+```csharp
+static void Main(string[] args)
+{
+    int i = 42;
+    Type type = i.GetType();//反射，运行期获得类型
+    Console.WriteLine(type);
+    Trace.Assert(type != null);
+}
+```
+
+
+
 ## WinForm入门图形界面GUI
 
 ### 创建窗口与添加控件按钮事件点击和MessagBox
